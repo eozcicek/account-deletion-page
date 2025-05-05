@@ -41,7 +41,7 @@
   <p id="result"></p>
 
   <script>
-    // Replace these with your actual Backendless App ID and API Key
+    // Backendless App ID and API Key
     Backendless.initApp("D7E523CE-A8B6-4C60-B8A9-22147E9F3237", "F2E77402-CFCD-4C18-BAA8-35046CD5963B");
 
     // Language text for English, Russian, and Turkish
@@ -103,17 +103,10 @@
       const password = document.getElementById("password").value;
       const resultElement = document.getElementById("result");
 
-      try {
-        const user = await Backendless.UserService.login(email, password, true);
-        await Backendless.Data.of("Users").remove(user.objectId);
-        resultElement.innerText = langTexts[currentLang].successMessage;
-      } catch (err) {
-        resultElement.innerText = langTexts[currentLang].errorMessage + " " + err.message;
+      if (!email || !password) {
+        resultElement.innerText = langTexts[currentLang].errorMessage + " Please enter email and password.";
+        return;
       }
-    }
 
-    // Initialize page text
-    updateTexts();
-  </script>
-</body>
-</html>
+      try {
+        // Logging in the user
