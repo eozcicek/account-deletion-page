@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete My Account</title>
+  <script src="https://cdn.jsdelivr.net/npm/backendless@7.2.10/dist/backendless.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: auto;
+      padding: 2rem;
+    }
+    input, button, select {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="title">Delete My Account</h2>
+
+  <p id="instruction">Enter your credentials to permanently delete your account.</p>
+
+  <select id="languageSelector" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="ru">Russian</option>
+    <option value="tr">Turkish</option>
+  </select>
+
+  <input id="email" type="email" placeholder="Email" required />
+  <input id="password" type="password" placeholder="Password" required />
+  <button onclick="confirmAndDelete()" id="deleteButton">Delete My Account</button>
+
+  <p id="result"></p>
+
+  <script>
+    // Replace these with your actual Backendless App ID and API Key
+    Backendless.initApp("D7E523CE-A8B6-4C60-B8A9-22147E9F3237", "F2E77402-CFCD-4C18-BAA8-35046CD5963B");
+
+    // Language text for English, Russian, and Turkish
+    const langTexts = {
+      en: {
+        title: "Delete My Account",
+        instruction: "Enter your credentials to permanently delete your account.",
+        deleteButton: "Delete My Account",
+        confirmationMessage: "Are you sure you want to delete your account permanently? This action cannot be undone.",
+        successMessage: "✅ Your account has been permanently deleted.",
+        errorMessage: "❌ Error: Something went wrong, please try again.",
+      },
+      ru: {
+        title: "Удалить мой аккаунт",
+        instruction: "Введите свои учетные данные для постоянного удаления учетной записи.",
+        deleteButton: "Удалить мой аккаунт",
+        confirmationMessage: "Вы уверены, что хотите удалить свою учетную запись навсегда? Это действие нельзя отменить.",
+        successMessage: "✅ Ваша учетная запись была удалена навсегда.",
+        errorMessage: "❌ Ошибка: Что-то пошло не так, пожалуйста, попробуйте еще раз.",
+      },
+      tr: {
+        title: "Hesabımı Sil",
+        instruction: "Hesabınızı kalıcı olarak silmek için giriş bilgilerinizi girin.",
+        deleteButton: "Hesabımı Sil",
+        confirmationMessage: "Hesabınızı kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+        successMessage: "✅ Hesabınız kalıcı olarak silindi.",
+        errorMessage: "❌ Hata: Bir şeyler yanlış gitti, lütfen tekrar deneyin.",
+      }
+    };
+
+    // Default language
+    let currentLang = "en";
+
+    // Change language based on user's selection
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelector").value;
+      currentLang = lang;
+      updateTexts();
+    }
+
+    // Update text based on selected language
+    function updateTexts() {
+      document.getElementById("title").innerText = langTexts[currentLang].title;
+      document.getElementById("instruction").innerText = langTexts[currentLang].instruction;
+      document.getElementById("deleteButton").innerText = langTexts[currentLang].deleteButton;
+    }
+
+    // Confirm account deletion
+    async function confirmAndDelete() {
+      const confirmed = confirm(langTexts[currentLang].confirmationMessage);
+      if (!confirmed) return;
+
+      await deleteAccount();
+    }
+
+    // Delete the account
+    async function deleteAccount() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const resultElement = document.getElementById("result");
+
+      try {
+        const user = await Backendless.UserService.login(email, password, true);
+        await Backendless.Data.of("Users").remove(user.objectId);
+        resultElement.innerText = langTexts[currentLang].successMessage;
+      } catch (err) {
+        resultElement.innerText = langTexts[currentLang].errorMessage + " " + err.message;
+      }
+    }
+
+    // Initialize page text
+    updateTexts();
+  </script>
+</body>
+</html>
