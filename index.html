@@ -129,8 +129,8 @@
       }
     }
 
-    // Initialize page text
-    updateTexts();
+    // Initialize page text after the script is loaded
+    window.onload = updateTexts;
   </script>
 </body>
 </html>
