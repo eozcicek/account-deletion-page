@@ -91,6 +91,7 @@
 
     // Confirm account deletion
     async function confirmAndDelete() {
+      console.log("Delete button clicked");
       const confirmed = confirm(langTexts[currentLang].confirmationMessage);
       if (!confirmed) return;
 
@@ -105,8 +106,28 @@
 
       if (!email || !password) {
         resultElement.innerText = langTexts[currentLang].errorMessage + " Please enter email and password.";
+        console.error("Email or password is missing.");
         return;
       }
 
       try {
+        console.log("Logging in user with email: " + email);
         // Logging in the user
+        const user = await Backendless.UserService.login(email, password, true);
+        console.log("User logged in successfully:", user);
+
+        // Deleting the user by objectId
+        await Backendless.Data.of("Users").remove(user.objectId);
+        resultElement.innerText = langTexts[currentLang].successMessage;
+        console.log("User deleted successfully");
+      } catch (err) {
+        resultElement.innerText = langTexts[currentLang].errorMessage + " " + err.message;
+        console.error("Error occurred:", err);
+      }
+    }
+
+    // Initialize page text
+    updateTexts();
+  </script>
+</body>
+</html>
