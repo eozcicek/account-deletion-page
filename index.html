@@ -2,171 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>✨ Delete My Account ✨</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.jsdelivr.net/npm/backendless@5.2.0/dist/backendless.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Karmic Numerology ✨ Support</title>
   <style>
     body {
-      font-family: 'Merriweather', serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: #e0e0e0;
-      margin: 0;
-      padding: 40px 20px;
-      background-attachment: fixed;
-      background-size: cover;
-      min-height: 100vh;
+      font-family: "Georgia", serif;
+      background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+      color: #f5f5f5;
+      text-align: center;
+      padding: 2rem;
     }
-
-    .container {
-      max-width: 520px;
-      background: rgba(25, 24, 44, 0.85);
-      margin: 0 auto;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 18px rgba(115, 104, 235, 0.5);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
     }
-
     h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #b5a1ff;
-      margin-bottom: 10px;
-    }
-
-    p {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
+      margin-top: 0;
+      font-weight: normal;
+      font-size: 1.2rem;
       color: #ccc;
     }
-
-    select, input, button {
-      width: 100%;
-      padding: 12px 14px;
-      font-size: 1rem;
-      margin-top: 16px;
-      border-radius: 6px;
-      border: 1px solid #777;
-      background-color: #29294d;
-      color: #eee;
+    .lang-buttons {
+      margin-bottom: 2rem;
     }
-
-    select:focus, input:focus, button:focus {
-      outline: none;
-      border-color: #a3a3ff;
-    }
-
-    button {
+    .lang-buttons button {
+      background-color: transparent;
+      border: 1px solid #f5f5f5;
+      color: #f5f5f5;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.5rem;
+      border-radius: 8px;
       cursor: pointer;
-      background-color: #4a47a3;
-      font-weight: bold;
-      border: none;
-      transition: background 0.3s ease;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
     }
-
-    button:hover {
-      background-color: #605dcf;
+    .lang-buttons button:hover {
+      background-color: #f5f5f5;
+      color: #16213e;
     }
-
-    #result {
-      margin-top: 20px;
-      font-weight: bold;
-      text-align: center;
-      font-size: 1rem;
-      color: #ffcccc;
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+    }
+    .section {
+      display: none;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section.active {
+      display: block;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2 id="title">✨ Delete My Account ✨</h2>
-    <p id="instruction">Enter your credentials to permanently delete your account.</p>
 
-    <select id="languageSelector" onchange="changeLanguage()">
-      <option value="en">English 🇬🇧</option>
-      <option value="ru">Русский 🇷🇺</option>
-      <option value="tr">Türkçe 🇹🇷</option>
-    </select>
-
-    <input id="email" type="email" placeholder="Email" required />
-    <input id="password" type="password" placeholder="Password" required />
-    <button onclick="confirmAndDelete()" id="deleteButton">Delete My Account</button>
-
-    <p id="result"></p>
+  <div class="lang-buttons">
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+    <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+    <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
   </div>
 
+  <h1>✨ Karmic Numerology ✨</h1>
+  <h2 id="subtitle">Support</h2>
+
+  <div id="en" class="section active">
+    <p>If you would like to delete your account and data associated with the <strong>Karmic Numerology</strong> app, please use the following form:</p>
+    <p><a href="https://eozcicek.github.io/account-deletion-page/" target="_blank">→ Go to the Account Deletion Page</a></p>
+    <p>If you have any questions or concerns, feel free to contact us at:</p>
+    <p><strong>Email:</strong> <a href="mailto:numeroloji.karmik@gmail.com">numeroloji.karmik@gmail.com</a></p>
+  </div>
+
+  <div id="tr" class="section">
+    <p><strong>Karmik Numeroloji</strong> uygulamasındaki hesabınızı ve verilerinizi silmek isterseniz, lütfen aşağıdaki formu kullanın:</p>
+    <p><a href="https://eozcicek.github.io/account-deletion-page/" target="_blank">→ Hesap Silme Sayfasına Git</a></p>
+    <p>Herhangi bir sorunuz veya endişeniz varsa, bizimle iletişime geçebilirsiniz:</p>
+    <p><strong>E-posta:</strong> <a href="mailto:numeroloji.karmik@gmail.com">numeroloji.karmik@gmail.com</a></p>
+  </div>
+
+  <div id="ru" class="section">
+    <p>Если вы хотите удалить свой аккаунт и данные из приложения <strong>Нумерология Кармы</strong>, пожалуйста, воспользуйтесь следующей формой:</p>
+    <p><a href="https://eozcicek.github.io/account-deletion-page/" target="_blank">→ Перейти на страницу удаления аккаунта</a></p>
+    <p>Если у вас есть вопросы или замечания, свяжитесь с нами:</p>
+    <p><strong>Эл. почта:</strong> <a href="mailto:numeroloji.karmik@gmail.com">numeroloji.karmik@gmail.com</a></p>
+  </div>
+
+  <footer>
+    © 2025 Karmic Numerology ✨
+  </footer>
+
   <script>
-    Backendless.initApp("D7E523CE-A8B6-4C60-B8A9-22147E9F3237", "F2E77402-CFCD-4C18-BAA8-35046CD5963B");
+    function setLanguage(lang) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(lang).classList.add('active');
 
-    const langTexts = {
-      en: {
-        title: "✨ Delete My Karmic Numerology Account ✨",
-        instruction: "Enter your credentials to permanently delete your account.",
-        deleteButton: "Delete My Account",
-        confirmationMessage: "Are you sure you want to delete your account permanently? This action cannot be undone.",
-        successMessage: "✅ Your account has been permanently deleted.",
-        errorMessage: "❌ Error: Something went wrong, please try again.",
-      },
-      ru: {
-        title: "✨ Удалите мой аккаунт Кармическая нумерология ✨",
-        instruction: "Введите свои учетные данные для постоянного удаления учетной записи.",
-        deleteButton: "Удалить мой аккаунт",
-        confirmationMessage: "Вы уверены, что хотите удалить свою учетную запись навсегда? Это действие нельзя отменить.",
-        successMessage: "✅ Ваша учетная запись была удалена навсегда.",
-        errorMessage: "❌ Ошибка: Что-то пошло не так, пожалуйста, попробуйте еще раз.",
-      },
-      tr: {
-        title: "✨ Karmik Numeroloji Hesabımı Sil ✨",
-        instruction: "Hesabınızı kalıcı olarak silmek için giriş bilgilerinizi girin.",
-        deleteButton: "Hesabımı Sil",
-        confirmationMessage: "Hesabınızı kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
-        successMessage: "✅ Hesabınız kalıcı olarak silindi.",
-        errorMessage: "❌ Hata: Bir şeyler yanlış gitti, lütfen tekrar deneyin.",
-      }
-    };
-
-    let currentLang = "en";
-
-    function changeLanguage() {
-      const lang = document.getElementById("languageSelector").value;
-      currentLang = lang;
-      updateTexts();
+      // Update subtitle
+      const subtitles = {
+        en: "Support",
+        tr: "Destek",
+        ru: "Поддержка"
+      };
+      document.getElementById("subtitle").innerText = subtitles[lang];
     }
-
-    function updateTexts() {
-      document.getElementById("title").innerText = langTexts[currentLang].title;
-      document.getElementById("instruction").innerText = langTexts[currentLang].instruction;
-      document.getElementById("deleteButton").innerText = langTexts[currentLang].deleteButton;
-    }
-
-    async function confirmAndDelete() {
-      const confirmed = confirm(langTexts[currentLang].confirmationMessage);
-      if (!confirmed) return;
-      await deleteAccount();
-    }
-
-    async function deleteAccount() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const resultElement = document.getElementById("result");
-
-      if (!email || !password) {
-        resultElement.innerText = langTexts[currentLang].errorMessage + " Please enter email and password.";
-        return;
-      }
-
-      try {
-        const user = await Backendless.UserService.login(email, password, true);
-        await Backendless.Data.of("Users").remove(user.objectId);
-        resultElement.innerText = langTexts[currentLang].successMessage;
-      } catch (err) {
-        resultElement.innerText = langTexts[currentLang].errorMessage + " " + err.message;
-      }
-    }
-
-    updateTexts();
   </script>
 </body>
 </html>
