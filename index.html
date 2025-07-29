@@ -1,56 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Delete My Account</title>
-
-  <!-- Corrected Backendless SDK URL -->
+  <meta charset="UTF-8" />
+  <title>✨ Delete My Account ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/backendless@5.2.0/dist/backendless.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: auto;
-      padding: 2rem;
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 40px 20px;
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 100vh;
     }
-    input, button, select {
+
+    .container {
+      max-width: 520px;
+      background: rgba(25, 24, 44, 0.85);
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(115, 104, 235, 0.5);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #b5a1ff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    select, input, button {
       width: 100%;
-      margin-top: 10px;
-      padding: 10px;
+      padding: 12px 14px;
       font-size: 1rem;
+      margin-top: 16px;
+      border-radius: 6px;
+      border: 1px solid #777;
+      background-color: #29294d;
+      color: #eee;
     }
+
+    select:focus, input:focus, button:focus {
+      outline: none;
+      border-color: #a3a3ff;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #4a47a3;
+      font-weight: bold;
+      border: none;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #605dcf;
+    }
+
     #result {
       margin-top: 20px;
       font-weight: bold;
+      text-align: center;
+      font-size: 1rem;
+      color: #ffcccc;
     }
   </style>
 </head>
 <body>
-  <h2 id="title">Delete My Account</h2>
+  <div class="container">
+    <h2 id="title">✨ Delete My Account ✨</h2>
+    <p id="instruction">Enter your credentials to permanently delete your account.</p>
 
-  <p id="instruction">Enter your credentials to permanently delete your account.</p>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English 🇬🇧</option>
+      <option value="ru">Русский 🇷🇺</option>
+      <option value="tr">Türkçe 🇹🇷</option>
+    </select>
 
-  <select id="languageSelector" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="ru">Russian</option>
-    <option value="tr">Turkish</option>
-  </select>
+    <input id="email" type="email" placeholder="Email" required />
+    <input id="password" type="password" placeholder="Password" required />
+    <button onclick="confirmAndDelete()" id="deleteButton">Delete My Account</button>
 
-  <input id="email" type="email" placeholder="Email" required />
-  <input id="password" type="password" placeholder="Password" required />
-  <button onclick="confirmAndDelete()" id="deleteButton">Delete My Account</button>
-
-  <p id="result"></p>
+    <p id="result"></p>
+  </div>
 
   <script>
-    // Backendless App ID and API Key
     Backendless.initApp("D7E523CE-A8B6-4C60-B8A9-22147E9F3237", "F2E77402-CFCD-4C18-BAA8-35046CD5963B");
 
-    // Language text for English, Russian, and Turkish
     const langTexts = {
       en: {
-        title: "Delete My Karmic Numerology Account",
+        title: "✨ Delete My Karmic Numerology Account ✨",
         instruction: "Enter your credentials to permanently delete your account.",
         deleteButton: "Delete My Account",
         confirmationMessage: "Are you sure you want to delete your account permanently? This action cannot be undone.",
@@ -58,7 +110,7 @@
         errorMessage: "❌ Error: Something went wrong, please try again.",
       },
       ru: {
-        title: "Удалите мой аккаунт Кармическая нумерология",
+        title: "✨ Удалите мой аккаунт Кармическая нумерология ✨",
         instruction: "Введите свои учетные данные для постоянного удаления учетной записи.",
         deleteButton: "Удалить мой аккаунт",
         confirmationMessage: "Вы уверены, что хотите удалить свою учетную запись навсегда? Это действие нельзя отменить.",
@@ -66,7 +118,7 @@
         errorMessage: "❌ Ошибка: Что-то пошло не так, пожалуйста, попробуйте еще раз.",
       },
       tr: {
-        title: "Karmik Numeroloji Hesabımı Sil",
+        title: "✨ Karmik Numeroloji Hesabımı Sil ✨",
         instruction: "Hesabınızı kalıcı olarak silmek için giriş bilgilerinizi girin.",
         deleteButton: "Hesabımı Sil",
         confirmationMessage: "Hesabınızı kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
@@ -75,33 +127,26 @@
       }
     };
 
-    // Default language
     let currentLang = "en";
 
-    // Change language based on user's selection
     function changeLanguage() {
       const lang = document.getElementById("languageSelector").value;
       currentLang = lang;
       updateTexts();
     }
 
-    // Update text based on selected language
     function updateTexts() {
       document.getElementById("title").innerText = langTexts[currentLang].title;
       document.getElementById("instruction").innerText = langTexts[currentLang].instruction;
       document.getElementById("deleteButton").innerText = langTexts[currentLang].deleteButton;
     }
 
-    // Confirm account deletion
     async function confirmAndDelete() {
-      console.log("Delete button clicked");
       const confirmed = confirm(langTexts[currentLang].confirmationMessage);
       if (!confirmed) return;
-
       await deleteAccount();
     }
 
-    // Delete the account
     async function deleteAccount() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
@@ -109,27 +154,18 @@
 
       if (!email || !password) {
         resultElement.innerText = langTexts[currentLang].errorMessage + " Please enter email and password.";
-        console.error("Email or password is missing.");
         return;
       }
 
       try {
-        console.log("Logging in user with email: " + email);
-        // Logging in the user
         const user = await Backendless.UserService.login(email, password, true);
-        console.log("User logged in successfully:", user);
-
-        // Deleting the user by objectId
         await Backendless.Data.of("Users").remove(user.objectId);
         resultElement.innerText = langTexts[currentLang].successMessage;
-        console.log("User deleted successfully");
       } catch (err) {
         resultElement.innerText = langTexts[currentLang].errorMessage + " " + err.message;
-        console.error("Error occurred:", err);
       }
     }
 
-    // Initialize page text
     updateTexts();
   </script>
 </body>
